@@ -1,2 +1,2 @@
-# chat-api
-Chat api using node.js(express) with socket.io ...
+# chat-application
+Chat application using node.js(express) with socket.io..
