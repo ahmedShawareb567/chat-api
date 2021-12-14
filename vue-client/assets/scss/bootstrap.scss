@@ -75,6 +75,7 @@ $input-padding-y: 0.6rem;
 // Layout & components
 @import "../../node_modules/bootstrap/scss/root";
 @import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/buttons";
 @import "../../node_modules/bootstrap/scss/type";
 @import "../../node_modules/bootstrap/scss/images";
 @import "../../node_modules/bootstrap/scss/containers";
@@ -96,9 +97,6 @@ $box-shadow-xl: 0px 22px 33px rgba(0, 0, 0, 0.04);
 $font-weight-medium: 500;
 $font-weight-semi: 600;
 $font-family-heading: "Roboto", sans-serif;
-@function aspectRatio($width, $height) {
-  @return ($height / $width) * 100%;
-}
 
 @mixin scrollbar {
   &::-webkit-scrollbar {

@@ -25,7 +25,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/headroom.client.js"],
+  plugins: ["~/plugins/headroom.client.js", "~/plugins/vee-validate.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -81,5 +81,7 @@ export default {
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    transpile: ["vee-validate"]
+  }
 };

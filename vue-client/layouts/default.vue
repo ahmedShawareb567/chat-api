@@ -1,6 +1,7 @@
 <template lang="pug">
     div
-        nuxt
+      UserSettings
+      nuxt
 </template>
 <script>
 export default {
