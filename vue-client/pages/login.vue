@@ -16,8 +16,11 @@
 
                 .col-12
                   .d-flex.align-items-center
-                    button.btn.btn-primary.bt-md.text-white Login
+                    button.btn.btn-primary.btn-md.text-white.d-flex.align-items-center
+                      span Login
+                      Loading(v-if="loginLoading").mx-1
                     nuxt-link.mx-2(to="/register") Register
+
 </template>
 <script>
 import { ValidationObserver } from "vee-validate";
@@ -29,12 +32,30 @@ export default {
       form: {
         email: null,
         password: null
-      }
+      },
+      loginLoading: false
     };
   },
+  middleware: ["notAuth"],
   methods: {
-    onSubmit() {
-      this.$router.push("/");
+    async onSubmit() {
+      try {
+        this.loginLoading = true;
+        const {
+          data: { success, message, data }
+        } = await this.$axios.post("/user/login", this.form);
+
+        if (success) {
+          this.$cookies.set("token", data.token);
+          this.$store.commit("user/SET_TOKEN", data.token);
+          this.$store.commit("user/SET_USER", data.user);
+          this.loginLoading = false;
+
+          this.$router.push("/");
+        }
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 };

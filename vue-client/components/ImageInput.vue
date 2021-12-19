@@ -85,6 +85,7 @@ export default {
         .then(this.$refs.validator.applyResult);
       this.$refs.preview.src = this.thumb || this.defaultSrc;
       this.$emit("input", this.thumb);
+      this.$emit("getFile", file);
     }
   }
 };
@@ -92,7 +93,7 @@ export default {
 
 <style lang="scss">
 .imageInput {
-  border: 1px dashed $gray-400;
+  border: 1px solid $gray-400;
   color: $body-color;
   display: flex;
   flex-wrap: wrap;
@@ -106,14 +107,14 @@ export default {
   text-align: center;
   background: url("https://via.placeholder.com/100");
   background-size: cover;
+  outline: 0.2rem solid $success;
   transition: all 0.2s ease-in-out;
   img {
     width: 100%;
   }
 
   &:hover {
-    border-color: $primary;
-    background: #fff;
+    border-color: transparent;
   }
 
   &__message {
@@ -138,6 +139,7 @@ export default {
 
   &--empty {
     height: 300px;
+    outline-color: transparent;
   }
   &--profile {
     width: 100px;

@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-      UserSettings
+      UserSettings(v-if="$store.getters['user/GET_TOKEN']")
       nuxt
 </template>
 <script>

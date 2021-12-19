@@ -22,6 +22,7 @@
                   .d-flex.align-items-center
                     button.btn.btn-primary.bt-md.text-white Register
                     nuxt-link.mx-2(to="/login") Login
+
 </template>
 <script>
 import { ValidationObserver } from "vee-validate";
@@ -37,9 +38,29 @@ export default {
       }
     };
   },
+  middleware: ["notAuth"],
+
   methods: {
-    onSubmit() {
-      this.$router.push("/");
+    async onSubmit() {
+      try {
+        const {
+          data: { success, token }
+        } = await this.$axios.post("/user/register", this.form);
+
+        this.$cookies.set("token", token);
+
+        this.$store.commit("user/SET_TOKEN", token);
+
+        if (success) {
+          const user = await this.$axios.post("/user/me", { token });
+
+          this.$store.commit("user/SET_USER", user);
+
+          this.$router.push("/");
+        }
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 };

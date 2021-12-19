@@ -9,8 +9,9 @@
               .row
                 .col-12.mb-5
                   .profile-picture.d-flex.justify-content-center
-                    ImageInput(v-model="form.image" profile label="" name="Image" message="" rules="required")
-
+                    ImageInput(profile label="" name="Image" message="" rules="required"  @getFile="file = $event")
+                    p {{file}}
+                    a(@click="upload()") upload
                 .col-md-6.mb-3
                   TextInput(v-model='form.email' label="" name="Email" placeholder="Email..."  rules="required|email")
 
@@ -34,15 +35,23 @@ export default {
   data() {
     return {
       form: {
-        image: null,
+        file: null,
         email: null,
-        username: null
-      }
+        username: null,
+        phone: null
+      },
+      file: null
     };
   },
+  middleware: ["auth"],
   methods: {
-    onSubmit() {
-      console.log("updated");
+    onSubmit() {},
+    async upload() {
+      try {
+        const fileUpload = await this.$upload(this.file, "users");
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 };

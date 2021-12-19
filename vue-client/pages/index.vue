@@ -2,6 +2,7 @@
   .chat-main
     .chat-content
       .container.pt-5.pb-5
+
         .chat-title.d-flex.justify-content-center.pb-5
           span: svgIcon(name="chat")
         .row
@@ -26,7 +27,7 @@
             .chat-inbox
               .chat-inbox-header
                 .chat-inbox-header-image
-                  AppImg(src="/images/user.jpg" alt="user" )
+                  AppImg(:src="user.image" alt="user" )
 
                 .chat-inbox-header-icons.d-flex.align-items-center
                   span: svgIcon(name="call")
@@ -49,8 +50,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  computed: {}
+  computed: {
+    ...mapGetters({
+      user: "user/GET_USER"
+    })
+  },
+  middleware: ["auth"]
 };
 </script>
 

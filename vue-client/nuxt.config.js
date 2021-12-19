@@ -25,7 +25,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/headroom.client.js", "~/plugins/vee-validate.js"],
+  plugins: [
+    "~/plugins/headroom.client.js",
+    "~/plugins/vee-validate.js",
+    "~/plugins/global.js"
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,6 +47,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     "bootstrap-vue/nuxt",
+    "@nuxtjs/axios",
+    "cookie-universal-nuxt",
     [
       "nuxt-i18n",
       {
@@ -79,6 +85,38 @@ export default {
       }
     ]
   ],
+  bootstrapVue: {
+    componentPlugins: [
+      "ButtonPlugin",
+      "InputGroupPlugin",
+      "FormPlugin",
+      "FormGroupPlugin",
+      "FormInputPlugin",
+      "FormTextareaPlugin",
+      "FormSelectPlugin",
+      "FormFilePlugin",
+      "FormCheckboxPlugin",
+      "FormRadioPlugin",
+      "AlertPlugin",
+      "ToastPlugin",
+      "ModalPlugin",
+      "TooltipPlugin",
+      "CollapsePlugin",
+      "SpinnerPlugin",
+      "PaginationPlugin",
+      "AvatarPlugin",
+      "ProgressPlugin",
+      "TablePlugin",
+      "PopoverPlugin",
+      "BadgePlugin"
+    ],
+    directivePlugins: ["VBTooltipPlugin", "VBPopoverPlugin"],
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
+  },
+  axios: {
+    baseURL: "http://localhost:5000/api/"
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

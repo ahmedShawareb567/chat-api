@@ -2,14 +2,27 @@
   .settings
       .settings-image
         nuxt-link(to="/profile")
-          AppImg(src="/images/user.jpg" alt="user")
+          AppImg(:src="user.image" alt="user")
       .settings-controls
-        button.btn.btn-danger.btn-sm.rounded-circle: svgIcon(name="logout")
+        button.btn.btn-danger.btn-sm.rounded-circle(@click="logOut()"): svgIcon(name="logout")
 
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
-  name: "UserSettings"
+  name: "UserSettings",
+  computed: {
+    ...mapGetters({
+      user: "user/GET_USER"
+    })
+  },
+  methods: {
+    logOut() {
+      this.$cookies.remove("token");
+      this.$store.commit("user/SET_TOKEN", null);
+      this.$router.push("/login");
+    }
+  }
 };
 </script>
 <style lang="scss">
